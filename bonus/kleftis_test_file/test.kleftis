@@ -1,0 +1,43 @@
+<-- coucou
+commentaire
+sur plusieurs lignes -->
+
+<- juste sur une ligne >
+
+coucou : ent (9)
+
+carre : ent [ent (a)] result a * a
+
+test.nomentier : ent (12)
+
+addition : ent [ent (a b)]
+    result a + b
+
+addition_float : reel [reel (a b)]
+    result a + b
+
+square : ent [ent (z)] (
+    (z = z + 1)
+    result z * z
+)
+
+max : ent [ent (a) ent (b)]
+    si [a > b]
+        (
+            result a)
+    sinon
+        (result b)
+
+test : ent [ent(i)] (
+    (a:ent(0))
+    tantque[i>0] (
+        (i=i- 1)
+        (a = a+1)
+    )
+    pour (i:ent(0)) [i<3] (i = i + 1) (
+        (a = a * a)
+    )
+    result a
+)
+
+(addition (3 5)) + test.nomentier

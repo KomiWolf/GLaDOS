@@ -1,0 +1,94 @@
+space : chaine (#@ #)
+
+star : chaine (#@*#)
+
+ret : chaine (#@
+#)
+
+finalret:chaine(#@#)
+
+top : chaine [ent (a)] (
+    (finalret = finalret + ret)
+    pour (b : ent(a)) [b > 0] (b = b - 1) (
+        pour (y : ent(a * 2)) [y > 0] (y = y - 1) (
+        finalret = finalret + space)
+        pour (i:ent(0)) [b > i] (i = i + 1) (
+            finalret = finalret + space)
+        (finalret = finalret + star)
+        pour (c: ent(((b - a) + b) + 1)) [c < a] (c = c + 1) (
+            finalret = finalret + space)
+        si [b < a] (finalret = finalret + star)
+        (finalret = finalret + ret)
+        )
+    result (finalret)
+)
+
+doubleline : chaine [ent (a)] (
+    pour (b : ent(a * 2)) [b >= 0] (b = b - 1) (
+        finalret = finalret + star)
+    pour (b : ent(a * 2)) [b > 1] (b = b - 1) (
+        finalret = finalret + space)
+    pour (b : ent(a * 2)) [b >= 0] (b = b - 1) (
+        finalret = finalret + star)
+    (finalret = finalret + ret)
+    result (finalret)
+)
+
+middle : chaine [ent (a)] (
+    pour (b : ent(a)) [b > 0] (b = b - 1) (
+        pour (c: ent(((b - a) + b))) [c <= a] (c = c + 2) (
+            finalret = finalret + space)
+        (finalret = finalret + star)
+        pour (y : ent((((a * 2) + 1) * 2) + ((a * 2) - 1) + (((b - a)*2)))) [y > 4] (y = y - 1) (
+            finalret = finalret + space)
+        (finalret = finalret + star)
+        (finalret = finalret + ret))
+    pour (b : ent(2)) [b <= a] (b = b + 1) (
+        pour (c: ent(((b - a) + b))) [c <= a] (c = c + 2) (
+            finalret = finalret + space)
+        (finalret = finalret + star)
+        pour (y : ent((((a * 2) + 1) * 2) + ((a * 2) - 1) + (((b - a)*2)))) [y > 4] (y = y - 1) (
+            finalret = finalret + space)
+        (finalret = finalret + star)
+        (finalret = finalret + ret))
+    result (finalret)
+)
+
+down : chaine [ent (a)] (
+    pour (b : ent(1)) [b <= a] (b = b + 1) (
+        pour (y : ent(a * 2)) [y > 0] (y = y - 1) (
+        finalret = finalret + space)
+        pour (i:ent(0)) [b > i] (i = i + 1) (
+            finalret = finalret + space)
+        (finalret = finalret + star)
+        pour (c: ent(((b - a) + b) + 1)) [c < a] (c = c + 1) (
+            finalret = finalret + space)
+        si [b < a] (finalret = finalret + star)
+        (finalret = finalret + ret)
+        )
+    result (finalret)
+)
+
+starfunc : chaine [ent (a)] (
+    si [a <= 0] (result #@Error 0 not accepted#)
+    (top(a))
+    (doubleline(a))
+    (middle(a))
+    (doubleline(a))
+    (down(a))
+    result(finalret)
+)
+
+starfunc (7)
+
+starfunc (6)
+
+starfunc (5)
+
+starfunc (4)
+
+starfunc (3)
+
+starfunc (2)
+
+starfunc (1)
